@@ -14,6 +14,7 @@
 
 ## Reids
 
+* [安装](reids/an-zhuang.md)
 * [interview](reids/interview/README.md)
   * [Page 1](reids/interview/page-1.md)
 * [Page 2](reids/page-2.md)
