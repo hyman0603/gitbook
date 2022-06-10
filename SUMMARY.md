@@ -11,3 +11,9 @@
 
 * [Requesting Time Off](the-formal-stuff/requesting-time-off.md)
 * [Filing Expenses](the-formal-stuff/filing-expenses.md)
+
+## Reids
+
+* [interview](reids/interview/README.md)
+  * [Page 1](reids/interview/page-1.md)
+* [Page 2](reids/page-2.md)
