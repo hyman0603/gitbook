@@ -55,4 +55,20 @@ vm.overcommit_memory = 1
 echo never > /sys/kernel/mm/transparent_hugepage/enabled
 ```
 
+4、在不停机的情况下升级或重启 Redis 实例
+
+请按照以下步骤避免停机。
+
+* 将您的新 Redis 实例设置为当前 Redis 实例的副本。为此，您需要一台不同的服务器，或者一台具有足够 RAM 以保持两个 Redis 实例同时运行的服务器。
+* 如果使用单台服务器，请确保副本在与主实例不同的端口上启动，否则副本无法启动。
+* 等待复制初始同步完成。检查副本的日志文件。
+* 使用[`INFO`](https://redis.io/commands/info)，确保主副本和副本具有相同数量的密钥。用于`redis-cli`检查副本是否按预期工作并正在回复您的命令。
+* 允许使用`CONFIG SET slave-read-only no`.
+* 将所有客户端配置为使用新实例（副本）。请注意，您可能希望使用该[`CLIENT PAUSE`](https://redis.io/commands/client-pause)命令来确保在切换期间没有客户端可以写入旧主控。
+* 一旦您确认主服务器不再接收任何查询（您可以使用[MONITOR 命令](https://redis.io/commands/monitor)检查），使用该命令将副本选择为主服务器`REPLICAOF NO ONE`，然后关闭您的主服务器。
+
+{% hint style="danger" %}
+Redis Cluster 4.0 在集群总线协议层面与 Redis Cluster 3.2 不兼容，因此需要批量重启。但是，Redis 5 集群总线向后兼容 Redis 4
+{% endhint %}
+
 \
