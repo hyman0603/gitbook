@@ -58,3 +58,44 @@ sudo rm -rf /var/lib/containerd
  sudo apt-get remove docker docker-engine docker.io containerd runc
 ```
 
+安装必要的一些系统工具
+
+```
+sudo apt-get update
+
+sudo apt-get install \
+    ca-certificates \
+    curl \
+    gnupg \
+    lsb-release
+```
+
+安装GPG证书
+
+```
+curl -fsSL https://mirrors.aliyun.com/docker-ce/linux/ubuntu/gpg | sudo apt-key add -
+```
+
+写入软件源信息
+
+```
+sudo add-apt-repository "deb [arch=amd64] https://mirrors.aliyun.com/docker-ce/linux/ubuntu $(lsb_release -cs) stable"
+```
+
+更新并安装Docker-CE
+
+```
+sudo apt-get update
+
+sudo apt-get install docker-ce docker-ce-cli containerd.io docker-compose-plugin
+```
+
+卸载docker-ce
+
+```
+sudo apt-get purge docker-ce docker-ce-cli containerd.io docker-compose-plugin
+
+sudo rm -rf /var/lib/docker
+sudo rm -rf /var/lib/containerd
+```
+
